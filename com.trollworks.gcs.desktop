@@ -6,3 +6,4 @@ Icon=com.trollworks.gcs
 Exec=run-gcs %F
 Categories=Game;X-Roleplaying;Utility
 Keywords=Roleplaying
+MimeType=application/x-gcs-file

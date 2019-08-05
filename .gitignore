@@ -1,2 +1,5 @@
 .flatpak-builder
 appdir
+repo
+gcstest
+*.flatpak

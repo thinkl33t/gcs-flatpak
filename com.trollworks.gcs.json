@@ -21,7 +21,8 @@
       "install -D run-gcs /app/bin/run-gcs",
       "mkdir -p export/share/applications",
       "install -Dm644 com.trollworks.gcs.png /app/share/icons/hicolor/512x512/apps/com.trollworks.gcs.png",
-      "install -D -m644 com.trollworks.gcs.desktop /app/share/applications/com.trollworks.gcs.desktop"
+      "install -D -m644 com.trollworks.gcs.desktop /app/share/applications/com.trollworks.gcs.desktop",
+      "install -D -m644 com.trollworks.gcs.xml /app/share/mime/packages/com.trollworks.gcs.xml"
     ],
     "build-options": { "env": { "JAVA_HOME" : "/app/jre", "PATH":"/usr/lib/sdk/openjdk/bin:/app/jre/bin:/usr/bin" } },
     "sources" : [ {
@@ -85,6 +86,10 @@
       {
         "type": "file",
         "path": "com.trollworks.gcs.png"
+      },
+      {
+        "type": "file",
+        "path": "com.trollworks.gcs.xml"
       }
    ]
 
