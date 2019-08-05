@@ -1,0 +1,88 @@
+{
+  "id" : "com.trollworks.gcs",
+  "branch" : "1.0",
+  "runtime" : "org.freedesktop.Platform",
+  "runtime-version" : "18.08",
+  "command": "run-gcs",
+  "sdk" : "org.freedesktop.Sdk",
+  "sdk-extensions" : [ "org.freedesktop.Sdk.Extension.openjdk" ],
+  "modules" : [ {
+    "name" : "openjdk",
+    "buildsystem" : "simple",
+    "build-commands" : [ "/usr/lib/sdk/openjdk/install.sh" ]
+  }, {
+    "name" : "gcs",
+    "buildsystem" : "simple",
+    "build-commands" : [
+      "ant/bin/ant -f gcs/build.xml bundle",
+      "mkdir -p /app/gcs",
+      "cp java_modules/*.jar /app/gcs",
+      "install -D run-gcs /app/bin/run-gcs"
+    ],
+    "build-options": { "env": { "JAVA_HOME" : "/app/jre", "PATH":"/usr/lib/sdk/openjdk/bin:/app/jre/bin:/usr/bin" } },
+    "sources" : [ {
+        "type" : "git",
+        "url" : "https://github.com/richardwilkes/gcs",
+        "dest": "gcs"
+      },
+      {
+        "type" : "git",
+        "url" : "https://github.com/richardwilkes/org.apache.commons.logging",
+        "dest" : "org.apache.commons.logging"
+      },
+      {
+        "type" : "git",
+        "url" : "https://github.com/richardwilkes/org.apache.fontbox",
+        "dest" : "org.apache.fontbox"
+      },
+      {
+        "type" : "git",
+        "url" : "https://github.com/richardwilkes/org.apache.pdfbox",
+        "dest" : "org.apache.pdfbox"
+      },
+      {
+        "type" : "git",
+        "url" : "https://github.com/richardwilkes/com.lowagie.text",
+        "dest" : "com.lowagie.text"
+      },
+      {
+        "type" : "git",
+        "url" : "https://github.com/richardwilkes/gnu.trove",
+        "dest" : "gnu.trove"
+      },
+      {
+        "type" : "git",
+        "url" : "https://github.com/richardwilkes/toolkit",
+        "dest" : "toolkit"
+      },
+      {
+        "type" : "git",
+        "url" : "https://github.com/richardwilkes/gcs_library",
+        "dest" : "gcs_library"
+      },
+      {
+        "type": "archive",
+        "url": "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.5-bin.tar.xz",
+        "sha256": "cebb705dbbe26a41d359b8be08ec066caba4e8686670070ce44bbf2b57ae113f",
+        "dest": "ant"
+      },
+      {
+          "type": "script",
+          "dest-filename": "run-gcs",
+          "commands": [
+              "cd /app/gcs",
+              "exec java com.trollworks.gcs.app.GCS \"$@\""
+          ]
+      }
+   ]
+
+  } ],
+  "finish-args" : [
+    "--env=PATH=/app/jre/bin:/usr/bin:/app/bin",
+    "--share=network",
+    "--filesystem=host",
+    "--env=JAVA_HOME=/app/jre",
+    "--env=CLASSPATH=/app/gcs/*",
+    "--socket=x11"
+   ]
+}
