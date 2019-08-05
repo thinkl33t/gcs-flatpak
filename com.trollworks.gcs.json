@@ -17,7 +17,10 @@
       "ant/bin/ant -f gcs/build.xml bundle",
       "mkdir -p /app/gcs",
       "cp java_modules/*.jar /app/gcs",
-      "install -D run-gcs /app/bin/run-gcs"
+      "install -D run-gcs /app/bin/run-gcs",
+      "mkdir -p export/share/applications",
+      "install -Dm644 com.trollworks.gcs.png /app/share/icons/hicolor/scaleable/apps/com.trollworks.gcs.png",
+      "install -D -m644 com.trollworks.gcs.desktop /app/share/applications/com.trollworks.gcs.desktop"
     ],
     "build-options": { "env": { "JAVA_HOME" : "/app/jre", "PATH":"/usr/lib/sdk/openjdk/bin:/app/jre/bin:/usr/bin" } },
     "sources" : [ {
@@ -73,6 +76,14 @@
               "cd /app/gcs",
               "exec java com.trollworks.gcs.app.GCS \"$@\""
           ]
+      },
+      {
+        "type": "file",
+        "path": "com.trollworks.gcs.desktop"
+      },
+      {
+        "type": "file",
+        "path": "com.trollworks.gcs.png"
       }
    ]
 
